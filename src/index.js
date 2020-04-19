@@ -44,13 +44,15 @@ module.exports = {
 
   toggle() {
     const exists = (element) => element instanceof GhIssuesView;
-    if (atom.workspace.getRightDock().getPaneItems().some(exists)) {
+    const panes = atom.workspace.getRightDock().getPaneItems();
+    if (panes.some(exists)) {
+      console.log(atom.workspace.getRightDock().isVisible());
       if (atom.workspace.getRightDock().isVisible()) {
         atom.workspace.getRightDock().hide();
       } else {
-        atom.workspace.getRightDock().show();
-      }
-    } else {
+        atom.workspace.toggle('quick-issues-2:///');
+          }
+        } else {
       this.views.pop(0);
       atom.workspace.open('quick-issues-2:///');
     }
