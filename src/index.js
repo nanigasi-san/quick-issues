@@ -48,7 +48,11 @@ module.exports = {
     if (panes.some(exists)) {
       console.log(atom.workspace.getRightDock().isVisible());
       if (atom.workspace.getRightDock().isVisible()) {
-        atom.workspace.getRightDock().hide();
+        if (atom.workspace.getRightDock().getActivePaneItem() instanceof GhIssuesView) {
+          atom.workspace.getRightDock().hide();
+        } else {
+          atom.workspace.toggle('quick-issues-2:///');
+        }
       } else {
         atom.workspace.toggle('quick-issues-2:///');
           }
